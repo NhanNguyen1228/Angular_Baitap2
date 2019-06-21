@@ -1,0 +1,56 @@
+<h1 style="text-align: center">Bài tập structural directive - CYBERSOFT</h1> <br>
+<div class="container">
+  <div class="QuanLyDMSP">
+    <div class="title">
+      <p>Quản lý danh sách sản phẩm</p>
+    </div>
+    <div class="input">
+      <div class="row">
+        <div class="col-md-3">
+          <input #maSP type="text" class="form-control" placeholder="Mã sản phẩm">
+        </div>
+        <div class="col-md-3">
+          <input #tenSP type="text" class="form-control" placeholder="Tên sản phẩm">
+        </div>
+        <div class="col-md-3">
+          <input #giaSP type="text" class="form-control" placeholder="Giá">
+        </div>
+        <div class="col-md-3">
+          <button (click)="themSanPham(maSP.value, tenSP.value, giaSP.value)" class="btn btn-success">Thêm sản
+            phẩm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="DanhMucSP">
+    <div class="title">
+      <p>Danh sách sản phẩm</p>
+    </div>
+    <div class="BangDS">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã SP</th>
+            <th>Tên SP</th>
+            <th>Giá SP</th>
+            <th>Setting</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of danhSachSanPham | paginate:{itemsPerPage: 5, currentPage:p} ; let stt = index" [ngClass]="{bgTR: stt % 2 === 0}">
+            <td>{{stt + 1}}</td>
+            <td>{{item.maSP}}</td>
+            <td>{{item.tenSP}}</td>
+            <td>{{item.giaSP}}</td>
+            <td>
+              <button (click)="xoaSanPham(item.maSP)" class="btn btn-danger">Xóa</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <pagination-controls (pageChange)="p=$event"></pagination-controls>
+    </div>
+  </div>
+</div>
